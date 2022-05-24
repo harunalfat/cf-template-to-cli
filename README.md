@@ -46,6 +46,6 @@ aws cloudformation deploy \
 	--stack-name my-service \
 	--capabilities CAPABILITY_NAMED_IAM \
 	--parameter-overrides \
-		RedisEndpoint=my-redis.something.clustercfg.euw1.cache.amazonaws.com:6379 \
-    LogFile= /var/log/app.log
+	  RedisEndpoint=my-redis.something.clustercfg.euw1.cache.amazonaws.com:6379 \
+    LogFile=/var/log/app.log
 ```
