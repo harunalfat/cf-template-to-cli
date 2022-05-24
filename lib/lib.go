@@ -3,6 +3,7 @@ package lib
 import (
 	"fmt"
 	"io/ioutil"
+	"sort"
 
 	"gopkg.in/yaml.v3"
 )
@@ -34,10 +35,17 @@ func ParseYaml(cfTemplatePath string) CFTemplate {
 
 func toParameterOverrides(parameters map[string]CFParameter) string {
 	var text string
+	var parameterNames []string
+
+	for name := range parameters {
+		parameterNames = append(parameterNames, name)
+	}
+	sort.Strings(parameterNames)
+
 	idx := 0
-	for name, val := range parameters {
+	for _, name := range parameterNames {
 		idx++
-		text += fmt.Sprintf("%s=%s", name, val.Default)
+		text += fmt.Sprintf("%s=%s", name, parameters[name].Default)
 		if idx != len(parameters) {
 			text += " \\\n\t\t"
 		}
